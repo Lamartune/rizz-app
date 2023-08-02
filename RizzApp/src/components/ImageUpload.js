@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import axios from 'axios';
+import { uploadImageToBackend } from '../utils/api';
 
-const App = () => {
+const ImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageUpload = async () => {
@@ -45,17 +39,6 @@ const App = () => {
         reject(error);
       };
     });
-  };
-
-  const uploadImageToBackend = async (base64Image) => {
-    try {
-      // API URL'ini değiştirin ve gerekli istek formatını belirleyin
-      const apiUrl = 'https://example.com/upload_image';
-      const response = await axios.post(apiUrl, { image: base64Image });
-      console.log('Gönderilen fotoğrafın cevabı:', response.data);
-    } catch (error) {
-      console.log('Fotoğraf yükleme hatası:', error);
-    }
   };
 
   return (
@@ -93,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default ImageUpload;
